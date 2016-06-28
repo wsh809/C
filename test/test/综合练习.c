@@ -1,77 +1,47 @@
 #include <stdio.h>
-int i;
-int j;
-int sum = 0;
-float avr;
-int max;
-int min;
-int score[]={67,98,75,63,82,79,81,91,66,84};
+#include <stdlib.h>
+#define N 10
 
-int sum_points()
+int cmp(const void *a,const void *b)        //若return *(int*)a - *(int*)b 则从小到大排序
 {
-    for(i=0;i<10;i++)
-    {
-        sum += score[i];
-    }
-    printf("总分为：%d\n\r",sum);
-    return 0;
+    return *(int*)b - *(int*)a;
 }
 
-int max_points()
-{
-    max = score[0];
-    printf("最高分为：%d\n\r",max);
-    return 0;
-
+int Sum(int score[]){
+    int s = 0,i;
+    for(i = 0 ; i < N ; i++)
+        s += score[i];
+    return s;
 }
 
-int min_points()
-{
-    min = score[9];
-    printf("最低分为：%d\n\r",min);
-    return 0;
-
+int Max(int score[]){
+    return score[0];
 }
 
-int avr_points()
-{
-    avr = sum/10;
-    printf("平均分为：%f\n\r",avr);
-    return 0;
+int Min(int score[]){
+    return score[N-1];
 }
 
-int ord_points()
-{
-    for(i=1;i<9;i++)
-    {
-        for(j=9;j>=i;j--)
-        {
-            if(score[j]>score[j-1])
-            {
-                int tmp;
-                tmp = score[j];
-                score[j] = score[j-1];
-                score[j-1] = tmp;
-            }
-        }
-    }
-    printf("成绩由高到低排序:");
-    for(i=0;i<10;i++)
-    {
-        printf("%d ",score[i]);
-    }
-    printf("\n\r");
-    return 0;
+double Avg(int s){
+    return (s + 0.0) / N;
 }
 
 int main()
 {
-    sum_points();
-    avr_points();
-    ord_points();
-    max_points();
-    min_points();
+    int score[N]={67,98,75,63,82,79,81,91,66,84};
+    int i,sum;
+    sum = Sum(score);
+    qsort(score,N,sizeof(int),cmp);//sort it
+    //四个参数分别为 要进行排序数组的首地址，参加排序的元素个数，每个元素所占字节，和比较函数
     
+    printf("Total score : %d\n",sum);
+    printf("Max score : %d\n",Max(score));
+    printf("Min Score : %d\n",Min(score));
+    printf("Average score : %f\n",Avg(sum));
+    printf("\n成绩排序:\n");
+    for(i = 0 ; i < N ; i++)
+    {
+        printf("Rank %d's score : %d\n",i+1,score[i]);
+    }
     return 0;
 }
-
