@@ -2,13 +2,13 @@
 
 int stepnum = 0;
 
-void Move(char getdisk, char putdisk)
+void Move(char getdisk[], char putdisk[])
 {
-    printf("%c---->%c\n",getdisk,putdisk);
+    printf("%s---->%s\n",getdisk,putdisk);
     stepnum++;
 }
 
-void hanoi(int n, char start, char mid, char target)
+void hanoi(int n, char start[], char mid[], char target[])
 {
     if(n==1)
         Move(start,target);
@@ -26,6 +26,6 @@ int main()
     printf("请输入盘子的个数:");
     scanf("%d",&num);
     printf("移动盘子的过程为：\n\r");
-    hanoi(num,'S','M','T');
+    hanoi(num,"Start","Mid","Target");
     printf("移动的总步数为： %d", stepnum);
 }
