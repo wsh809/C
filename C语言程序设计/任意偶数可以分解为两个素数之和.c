@@ -1,4 +1,5 @@
-#include <studio.h>
+#include <stdio.h>
+
 int isprime(int n)
 {
     int i;
@@ -10,15 +11,17 @@ int isprime(int n)
 
 int main()
 {
-    int x,num;
-    printf("请输入一个偶数：")；
+    int i,num;
+    printf("请输入一个偶数：");
     do
     {
         scanf("%d",&num);
-        printf("输入错误，请重新输入一个偶数：")
+        if(num%2==0)
+            break;
+        printf("输入错误，请重新输入一个偶数：");
     }while(num%2);
-    for(i=2;i<=num;i++)
+    for(i=2;i<=num/2;i++)
         if(isprime(i)&&isprime(num-i))
-            printf("%d = %d + %d", num,i,num-i)
-    return 0;    
+            printf("%d = %d + %d\r\n", num,i,num-i);
+            return 0;
 }
