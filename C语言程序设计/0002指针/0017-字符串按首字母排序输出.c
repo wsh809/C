@@ -1,15 +1,18 @@
-
-#include  <stdio.h>
-#include  <string.h>
-void  fun ( char *w,  int  m )
-{  char  s, *p1 , *p2 ;
-    p1=w;   p2=w+m-1;
-    while(p1<p2)
-    {   s=*p1++;   *p1=*p2-- ; *p2=s;    }
-}
-int main( )
-{  char    a[ ]="1234567";
-    fun ( a , (int) strlen(a) );
-    puts(a);
-    return 0;
+/*将字符串按首字母排序输出*/
+#include<stdio.h>
+#include<string.h>
+int main(  )
+{  int i,j;
+    static char *str[4]={"Program","Fortran","C" ,"Basic"};
+    char *temp;                          /*定义指针 *temp，作为临时变量交换两个字符串*/
+    for(i=0;i<4;i++)
+        for(j=i+1;j<4;j++)
+            if ( strcmp(str[i],str[j])>0 )
+            {   temp=str[j] ;
+                str[j]=str[i];
+                str[i]=temp;
+            }
+    for(i=0; i<4; i++)
+        printf("%s\n",str[i] );
+    return 0;  
 }
