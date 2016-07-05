@@ -34,3 +34,26 @@ int main()
     }
     return 0;    
 }
+
+void exchange(int a[])
+{
+    int i,k,m;
+    m = sizeof(a[0]);
+    for(i=m-2; i>=0; i--)
+    {
+        for(k=0;k<=i;k++)
+        {
+            if(a[k]>a[k+1])      //当前面的数比后面的数大时
+            {
+                int temp;      //定义临时变量temp
+                temp = a[k];    //将前面的数赋值给temp
+                a[k] = a[k+1];//前后之数颠倒位置
+                a[k+1] = temp;    //将较大的数放在后面
+            }
+        }
+    }
+    for(i=0;i<m;i++)
+    {
+        printf("%d ", a[i]);
+    }
+}
