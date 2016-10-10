@@ -36,17 +36,16 @@ int MaxSubSum(int a[], int n)
                 flag = 0;
             }
         }
-        else if(NowSum < 0)
+        else if(NowSum <= 0)
         {
             NowSum = 0;
             flag = i+1;
+            if(a[i]==0)
+                {
+                    Start = i;
+                    End = i;
+                }
         }
-        else if(NowSum == 0 && a[i] == 0)
-        {
-            Start = i;
-            End = i;
-        }
-        
     }
     printf("%d %d %d", MaxSum, a[Start], a[End]);
     return MaxSum;
