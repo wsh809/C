@@ -11,10 +11,7 @@ int main()
         scanf("%d",&a[i]);
     }
     Sum = MaxSubSum(a, k);
-    if(Sum > 0)
-        printf("%d",Sum);
-    else
-        printf("0");
+    printf("%d",Sum);
     return 0;
 }
 //在线算法，复杂度O(N)

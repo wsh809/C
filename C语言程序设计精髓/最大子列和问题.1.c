@@ -3,18 +3,14 @@
 int MaxSubSum(int a[], int n);
 int main()
 {
-    int k,i,Sum;
+    int k,i;
     scanf("%d",&k);
     int a[k];
     for(i=0;i<k;i++)
     {
         scanf("%d",&a[i]);
     }
-    Sum = MaxSubSum(a, k);
-    if(Sum > 0)
-        printf("%d",Sum);
-    else
-        printf("0");
+    MaxSubSum(a, k);
     return 0;
 }
 
@@ -22,10 +18,11 @@ int MaxSubSum(int a[], int n)
 {
     int NowSum, MaxSum;
     int i;
+    int flag = 0;
     int Start,End;
     NowSum = MaxSum = 0;
     Start = 0;
-    End = n;
+    End = n-1;
     for(i=0;i<n;i++)
     {
         NowSum += a[i];
@@ -33,12 +30,24 @@ int MaxSubSum(int a[], int n)
         {
             MaxSum = NowSum;
             End = i;
+            if(flag > 0)
+            {
+                Start = flag;
+                flag = 0;
+            }
         }
         else if(NowSum < 0)
         {
-             NowSum = 0;
-            Start = i+1;
-        }       
+            NowSum = 0;
+            flag = i+1;
+        }
+        else if(NowSum == 0 && a[i] == 0)
+        {
+            Start = i;
+            End = i;
+        }
+        
     }
+    printf("%d %d %d", MaxSum, a[Start], a[End]);
     return MaxSum;
 }
