@@ -36,7 +36,8 @@ void main()
     //插入一个数据节点
     Insert(head, p, 1);
     Output(head);
-   
+    printf("\n\r");
+    
     Delete(head, 1);
     Output(head);
     getchar();
