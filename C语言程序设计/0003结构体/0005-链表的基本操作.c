@@ -49,12 +49,15 @@ void Creat(NODE *head, int n)
     //创建一个指向类型为node的结构体的指针
     printf("请输入%d个新名字：",n);
     NODE *p;
+    NODE *q;
+    q = head;
     for(;n>0;n--)
     {
         p = (NODE *)malloc(sizeof(NODE));
         gets(p->name);          //读取数据
-        p->link = head->link;   //新数据节点的尾部与head->link指向的节点头部连在一起
-        head->link = p;         //将head->link与新数据节点的头部连在一起，完成新建节点
+        q->link = p;   //新数据节点的尾部与head->link指向的节点头部连在一起
+        p->link = NULL;         //将head->link与新数据节点的头部连在一起，完成新建节点
+        q = p;
     }
 }
 
