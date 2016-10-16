@@ -17,31 +17,40 @@ List Merge( List L1, List L2 );
 
 int main()
 {
+    List head1 = (List)malloc(sizeof(List));
+    head1->Next = NULL;
+    List head2 = (List)malloc(sizeof(List));
+    head2->Next = NULL;
+    List head3 = (List)malloc(sizeof(List));
+    head3->Next = NULL;
+    List L1,L2,L;
+    
+    
     int m,n;
-    List L1, L2,L;
     printf("数列1的数字个数为：");
     scanf("%d",&m);
     printf("请按从小到大的顺序输入%d个数字：",m);
-    L1 = Read(m);
+    L1 = Read(head1,m);
     
     printf("数列2的数字个数为：");
     scanf("%d",&n);
     printf("请按从小到大的顺序输入%d个数字：",n);
-    L2 = Read(n);
+    L2 = Read(head2,n);
     
+    L = Merge(L1, L2);
+    Print(L);
+    printf("\r");
     Print(L1);
     printf("\r");
     Print(L2);
     printf("\r");
-    L = Merge(L1, L2);
-    Print(L);
+   
     return 0;
 }
 
-List Read(int i)
+List Read(List head, int i)
 {
-    List head = (List)malloc(sizeof(List));
-    head->Next = NULL;
+    
     List p;
     List q;
     q = head;
@@ -53,13 +62,15 @@ List Read(int i)
         p->Next = NULL;
         q = p;
     }
-    return head->Next;
+    return head;
 }
 
 void Print(List head)
 {
     List p;
-    p = head;
+    p = head->Next;
+    if(p == NULL)
+        printf("NULL ");
     while(p != NULL)
     {
         printf("%d ",p->Data);
@@ -70,30 +81,37 @@ void Print(List head)
 
 List Merge(List L1, List L2)
 {
-    List head = (List)malloc(sizeof(List));
-    head->Next = NULL;
-    List p = head;
-    while(L1 != NULL && L2!= NULL)
+    List L3 = (List)malloc(sizeof(List));
+    List p1,p2,p3,add;
+    p3 = L3;
+    L3->Next = NULL;
+    p1 = L1->Next;
+    p2 = L2->Next;
+    while(p1 != NULL && p2!= NULL)
     {
-        if(L1->Data < L2->Data)
+        if(p1->Data < p2->Data)
         {
-            p->Next = L1;
-            L1 = L1->Next;
+            add = p1;
+            p1 = p1->Next;
         }
         else
         {
-            p->Next = L2;
-            L2 = L2->Next;
+            add = p2;
+            p2 = p2->Next;
         }
-        p = p->Next;
+        p3->Next = add;
+        add->Next = NULL;
+        p3 = add;
     }
-    if(L1 != NULL)
+    if(p1 != NULL)
     {
-        p->Next = L1;
+        p3->Next = p1;
     }
-    if(L2 != NULL)
+    if(p2 != NULL)
     {
-        p->Next = L2;
+        p2->Next = p2;
     }
-    return head->Next;
+    L1->Next = NULL;
+    L2->Next = NULL;
+    return L3;
 }
