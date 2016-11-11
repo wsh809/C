@@ -14,6 +14,8 @@ int GetKey();
 
 int Get_neu_state(int key);
 
+void LedSet(int num);
+
 int main()
 {
     int flag = 0;
@@ -47,21 +49,25 @@ int main()
                 cout<<"_current_state is "<<_current_state<<endl;
                 cout<<"_neu_state is "<<_neu_state<<endl;
                 cout<<"num is "<<_num<<endl;
+                LedSet(_num);
                 break;
             case 2: _num += 2;
                 cout<<"_current_state is "<<_current_state<<endl;
                 cout<<"_neu_state is "<<_neu_state<<endl;
                 cout<<"num is "<<_num<<endl;
+                LedSet(_num);
                 break;
             case 3: _num += 3;
                 cout<<"_current_state is "<<_current_state<<endl;
                 cout<<"_neu_state is "<<_neu_state<<endl;
                 cout<<"num is "<<_num<<endl;
+                LedSet(_num);
                 break;
             case 4: _num += 4;
                 cout<<"_current_state is "<<_current_state<<endl;
                 cout<<"_neu_state is "<<_neu_state<<endl;
                 cout<<"num is "<<_num<<endl;
+                LedSet(_num);
                 break;
             default: break;
         }
@@ -155,4 +161,16 @@ int GetKey()
     Sleep(100);
 
     return key;
+}
+
+void LedSet(int num)
+{
+    switch(num%4)
+    {
+        case 0: cout<<"display of the LED ist:"<<"--X--X--"<<endl<<"******************"<<endl; break;
+        case 1: cout<<"display of the LED ist:"<<"--X--O--"<<endl<<"******************"<<endl; break;
+        case 2: cout<<"display of the LED ist:"<<"--O--X--"<<endl<<"******************"<<endl; break;
+        case 3: cout<<"display of the LED ist:"<<"--O--O--"<<endl<<"******************"<<endl; break;
+        default: break;
+    }
 }
